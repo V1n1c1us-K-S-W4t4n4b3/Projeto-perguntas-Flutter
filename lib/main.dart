@@ -1,69 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+main() => runApp(PerguntaApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// classe que controla o estado da aplicaçao, (interaçao entre codigo e tela)
+class PerguntasAppState extends State<PerguntaApp> {
+  // variavel que guarda a posiçao da pergunta atual
+  var perguntaSelecionada = 0;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+// função que seleciona a resposta e vai para a proxima pergunta
+  void responder() {
     setState(() {
-      _counter++;
+      perguntaSelecionada++;
     });
+    (perguntaSelecionada);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Contador de clicks:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+    final perguntas = [
+      'Qual sua cor favorita?',
+      'Qual seu animal favorito?',
+    ];
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Perguntas'),
+        ),
+        body: Column(
+          children: [
+            Text(perguntas[perguntaSelecionada]),
+            ElevatedButton(child: Text('Resposta 1'), onPressed: responder),
+            ElevatedButton(child: Text('Resposta 2'), onPressed: responder),
+            ElevatedButton(child: Text('Resposta 3'), onPressed: responder),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+// classe que constitui a tela atual, nela foi recebido o estado atravez de herança
+class PerguntaApp extends StatefulWidget {
+  PerguntasAppState createState() {
+    return PerguntasAppState();
   }
 }
