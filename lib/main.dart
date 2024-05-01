@@ -4,16 +4,16 @@ import 'package:flutter/widgets.dart';
 main() => runApp(PerguntaApp());
 
 // classe que controla o estado da aplicaçao, (interaçao entre codigo e tela)
-class PerguntasAppState extends State<PerguntaApp> {
+class _PerguntasAppState extends State<PerguntaApp> {
   // variavel que guarda a posiçao da pergunta atual
-  var perguntaSelecionada = 0;
+  var _perguntaSelecionada = 0;
 
 // função que seleciona a resposta e vai para a proxima pergunta
-  void responder() {
+  void _responder() {
     setState(() {
-      perguntaSelecionada++;
+      _perguntaSelecionada++;
     });
-    (perguntaSelecionada);
+    (_perguntaSelecionada);
   }
 
   @override
@@ -30,10 +30,10 @@ class PerguntasAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: [
-            Text(perguntas[perguntaSelecionada]),
-            ElevatedButton(child: Text('Resposta 1'), onPressed: responder),
-            ElevatedButton(child: Text('Resposta 2'), onPressed: responder),
-            ElevatedButton(child: Text('Resposta 3'), onPressed: responder),
+            Text(perguntas[_perguntaSelecionada]),
+            ElevatedButton(child: Text('Resposta 1'), onPressed: _responder),
+            ElevatedButton(child: Text('Resposta 2'), onPressed: _responder),
+            ElevatedButton(child: Text('Resposta 3'), onPressed: _responder),
           ],
         ),
       ),
@@ -43,7 +43,7 @@ class PerguntasAppState extends State<PerguntaApp> {
 
 // classe que constitui a tela atual, nela foi recebido o estado atravez de herança
 class PerguntaApp extends StatefulWidget {
-  PerguntasAppState createState() {
-    return PerguntasAppState();
+  _PerguntasAppState createState() {
+    return _PerguntasAppState();
   }
 }
