@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './respostas.dart';
 
 main() => runApp(PerguntaApp());
 
@@ -13,15 +14,62 @@ class _PerguntasAppState extends State<PerguntaApp> {
     setState(() {
       _perguntaSelecionada++;
     });
-    (_perguntaSelecionada);
   }
 
   @override
   Widget build(BuildContext context) {
-    final perguntas = [
-      'Qual sua cor favorita?',
-      'Qual seu animal favorito?',
+    final List<Map> perguntas = [
+      {
+        'texto': 'Qual sua cor favorita?',
+        'respostas': ['Preto', 'Vermelho', 'Azul', 'Branco']
+      },
+      {
+        'texto': 'Qual seu animal favorito?',
+        'respostas': ['Leão', 'Cavalo', 'Touro', 'Tubarão']
+      },
+      {
+        'texto': 'Qual sua comida japonesa favorita?',
+        'respostas': ['Yakissoba', 'Sushi', 'Poke', 'Lámen']
+      },
+      {
+        'texto': 'Qual seu PowerRanger favorito?',
+        'respostas': ['Preto', 'Vermelho', 'Azul', 'Branco']
+      },
+      {
+        'texto': 'Qual seu Anime favorito?',
+        'respostas': [
+          'Naruto',
+          'Cavaleiros do Zodiaco',
+          'Dragon Ball Z',
+          'Yu Yu Hakusho'
+        ]
+      },
+      {
+        'texto': 'Qual seu Esporte favorito?',
+        'respostas': ['Skate', 'Surf', 'Futebol', 'Volei']
+      },
+      {
+        'texto': 'Qual seu meio de transporte favorito?',
+        'respostas': ['Bicicleta', 'Carro', 'Moto', 'Ônibus']
+      },
+      {
+        'texto': 'Qual seu país favorito?',
+        'respostas': ['Brasil', 'Japão', 'Italia', 'França']
+      },
+      {
+        'texto': 'Qual sua área de trabalho?',
+        'respostas': ['Exatas', 'Humanas', 'Biologicas', 'Todas']
+      },
+      {
+        'texto': 'Qual seu estado civil?',
+        'respostas': ['Solteiro', 'Casado', 'Separado', 'Divorciado']
+      }
     ];
+
+    List<Widget> respostas = [];
+    for (String textoResp in perguntas[_perguntaSelecionada]['respostas']) {
+      respostas.add(Resposta(textoResp, _responder));
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -30,10 +78,8 @@ class _PerguntasAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: <Widget>[
-            Questao(perguntas[_perguntaSelecionada]),
-            ElevatedButton(child: Text('Resposta 1'), onPressed: _responder),
-            ElevatedButton(child: Text('Resposta 2'), onPressed: _responder),
-            ElevatedButton(child: Text('Resposta 3'), onPressed: _responder),
+            Questao(perguntas[_perguntaSelecionada]['texto']),
+            ...respostas,
           ],
         ),
       ),
